@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>Identity</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="css/bootstrap-css-simplex.css">
+
+    <link rel="stylesheet" href="css/jquery-ui.css">
+
+</head>
+<body>
+
+
+<div class="container">
+
+    <div class="page-header">
+        <h3>Create Identity</h3>
+    </div>
+
+    <div class="alert alert-danger fade in" id="error-message"  style="display:none">
+        <button type="button" class="close">×</button>
+        <div id = "alert_placeholder_error"></div>
+    </div>
+
+    <div class="alert alert-info fade in" id="info-message"  style="display:none">
+        <button type="button" class="close">×</button>
+        <div id = "alert_placeholder_info"></div>
+    </div>
+
+    <div class="alert alert-success fade in" id="success-message"  style="display:none">
+        <button type="button" class="close">×</button>
+        <div id = "alert_placeholder_success"></div>
+    </div>
+
+    <div class="col-xs-12">
+        <form class="form">
+            <h2 class="form-signin-heading"></h2>
+
+            <div class="row">
+                <div class="col-xs-2 form-group">
+                    <label for="cpf" class="col-lg-12 control-label" style="text-align:right">Identification No.*:</label>
+                </div>
+                <div id="cpf-div" class="col-xs-4 form-group">
+                    <input type="text" id="cpf" class="form-control" placeholder="e.g. 04925745543"/>
+                </div>
+
+                <div class="col-xs-2 form-group">
+                    <label for="nome"  class="col-lg-12 control-label" style="text-align:right">Name*:</label>
+                </div>
+                <div id="nome-div"  class="col-xs-4 form-group">
+                    <input type="text" id="nome" class="form-control" placeholder="e.g. Joao Silva"/>
+                </div>
+
+                <div class="col-xs-2 form-group">
+                    <label for="dataNascimento" class="col-lg-12 control-label" style="text-align:right">Date of Birth*:</label>
+                </div>
+                <div  id="nascimento-div" class="col-xs-4 form-group">
+                    <input type="text" id="dataNascimento" class="form-control" placeholder="e.g., 10/10/1960"/>
+                </div>
+
+                <div class="col-xs-2 form-group">
+                    <label for="email" class="col-lg-12 control-label" style="text-align:right">Email*:</label>
+                </div>
+                <div  id="email-div" class="col-xs-4 form-group">
+                    <input type="text" id="email" class="form-control" placeholder="e.g., joao@email.com.br"/>
+                </div>
+
+                <div class="col-xs-2 form-group">
+                    <label for="documento" class="col-lg-12 control-label" style="text-align:right">Passport No.*:</label>
+                </div>
+                <div  id="documento-div" class="col-xs-4 form-group">
+                    <input type="text" id="documento" class="form-control" placeholder="e.g., 45654343"/>
+                </div>
+
+                <div class="col-xs-2 form-group">
+                    <label for="endereco" class="col-lg-12 control-label" style="text-align:right">Address:</label>
+                </div>
+                <div  id="endereco-div" class="col-xs-4 form-group">
+                    <input type="text" id="endereco" class="form-control" placeholder="e.g., Avenida Paulista, 1223"/>
+                </div>
+
+                <div class="col-xs-2 form-group">
+                    <label for="telefone" class="col-lg-12 control-label" style="text-align:right">Phone Number:</label>
+                </div>
+                <div  id="telefone-div" class="col-xs-4 form-group">
+                    <input type="text" id="telefone" class="form-control" placeholder="e.g., 11988723124"/>
+                </div>
+
+            </div>
+
+            <div class="well bs-component col-xs-12">
+                <div class="col-xs-2 form-group">
+                    <br><br>
+                    <label for="file" class="col-lg-12 control-label" style="text-align:right">Identification Document:</label>
+                </div>
+                <div class="col-xs-4 form-group">
+                    <br><br>
+                    <input type="file" name="file" id="file">
+                </div>
+            </div>
+
+            <div class="well bs-component col-xs-12">
+                <div class="col-xs-2 form-group">
+                    <label for="participantsCheckbox">Share with: </label>
+                </div>
+
+                <div class="col-xs-10 form-group">
+                    <fieldset id="participantsCheckbox">
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="col-xs-2">
+                <br>
+                <input type="button" id="new" class="btn btn-lg btn-primary btn-block" value="Create">
+            </div>
+
+        </form>
+
+    </div>
+
+    <span id="status"></span>
+
+
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/common.js"></script>
+<script src="js/headerTop.js"></script>
+<script src="js/manageIdentity.js"></script>
+
+</body>
+</html>

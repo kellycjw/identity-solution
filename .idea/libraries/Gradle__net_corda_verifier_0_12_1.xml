@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: net.corda:verifier:0.12.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.corda/verifier/0.12.1/107d591995126512d538c9b90ed12cd20dc6ee33/verifier-0.12.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.corda/verifier/0.12.1/3b6ed5e346a82a64408bfda89a7b4470c23da3e9/verifier-0.12.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.corda/verifier/0.12.1/82821922ed3ade20717b6a7fccc6772632c04ffd/verifier-0.12.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

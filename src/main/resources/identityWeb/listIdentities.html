@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>Identity</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="css/bootstrap-css-simplex.css">
+
+    <link rel="stylesheet" href="css/jquery-ui.css">
+
+</head>
+<body>
+
+
+<div class="container">
+
+    <div class="page-header">
+        <h3>Registered Customers</h3>
+    </div>
+
+    <div class="alert alert-danger fade in" id="error-message"  style="display:none">
+        <button type="button" class="close">×</button>
+        <div id = "alert_placeholder_error"></div>
+    </div>
+
+    <div class="alert alert-info fade in" id="info-message"  style="display:none">
+        <button type="button" class="close">×</button>
+        <div id = "alert_placeholder_info"></div>
+    </div>
+
+    <div class="alert alert-success fade in" id="success-message"  style="display:none">
+        <button type="button" class="close">×</button>
+        <div id = "alert_placeholder_success"></div>
+    </div>
+
+    <div class="col-xs-12">
+        <form class="form-inline">
+            <h2 class="form-signin-heading"></h2>
+
+			<table class="table table-hover" id="tbl_identities">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Identification No.</th>
+						<th>Passport No.</th>
+                        <th>Identification Document</th>
+                        <th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+        </form>
+    </div>
+    <span id="status"></span>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/common.js"></script>
+<script src="js/headerTop.js"></script>
+<script src="js/listIdentities.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: org.graphstream:pherd:1.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.graphstream/pherd/1.0/def146e11a24b48f88e8af5fa14ca383f8ee4dd2/pherd-1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.graphstream/pherd/1.0/b26bc429be67fa5a3fe5b389cbaae27d70107f1b/pherd-1.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.graphstream/pherd/1.0/fb8f8b64e0ce7c4a93ba5980c9813531cc6917cc/pherd-1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: io.requery:requery:1.2.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.requery/requery/1.2.1/688ecf339e47f404ac378593f16af8c04f20e553/requery-1.2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.requery/requery/1.2.1/792d8231567eaace29bf74d5f9d8785f8e7d4ca/requery-1.2.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.requery/requery/1.2.1/b4a6ad391d8262545aef1a910f298bd4ee227f8/requery-1.2.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

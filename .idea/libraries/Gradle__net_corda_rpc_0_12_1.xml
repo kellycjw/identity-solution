@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: net.corda:rpc:0.12.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.corda/rpc/0.12.1/dd313406ec497dfa0771f3b24af8e2fb165f844c/rpc-0.12.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.corda/rpc/0.12.1/820c4b50e88db795220f307f6bddefda42fdd135/rpc-0.12.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.corda/rpc/0.12.1/f88cfa725f2a801ae5edd9bac261d1050d189cd1/rpc-0.12.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

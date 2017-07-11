@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="corda-training-solutions_main" target="1.8" />
+      <module name="corda-training-solutions_test" target="1.8" />
+      <module name="fingerprint_main" target="1.8" />
+      <module name="fingerprint_test" target="1.8" />
+      <module name="identity-solution_main" target="1.8" />
+      <module name="identity-solution_test" target="1.8" />
+      <module name="identityOnCorda-template_main" target="1.8" />
+      <module name="identityOnCorda-template_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

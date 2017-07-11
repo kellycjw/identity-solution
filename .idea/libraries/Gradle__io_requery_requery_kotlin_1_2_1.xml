@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: io.requery:requery-kotlin:1.2.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.requery/requery-kotlin/1.2.1/23b0efb013a07b8a36c3faa751328a7566944162/requery-kotlin-1.2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.requery/requery-kotlin/1.2.1/7cc748a11f42530ca58caa3243057883241da1e2/requery-kotlin-1.2.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.requery/requery-kotlin/1.2.1/ffbdc8d2defc151d536380a8e1a3f47cebc619aa/requery-kotlin-1.2.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jolokia:jolokia-server-detector:2.0.0-M3">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jolokia/jolokia-server-detector/2.0.0-M3/4991d072ec3ea095f50be2f7c20e957a46bc94e9/jolokia-server-detector-2.0.0-M3.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jolokia/jolokia-server-detector/2.0.0-M3/b64599f48dd85ef3ff7507515c8b24be926b5299/jolokia-server-detector-2.0.0-M3-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jolokia/jolokia-server-detector/2.0.0-M3/c6786dbe5670236618c4b36f552a6cbfc4e503e5/jolokia-server-detector-2.0.0-M3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: net.corda:finance:0.12.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.corda/finance/0.12.1/2a75f4c554ce06d3afd597e65eb0f35e65b7de43/finance-0.12.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.corda/finance/0.12.1/fd98b6b1da59d076842f53ba9a42111e6c66ff56/finance-0.12.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.corda/finance/0.12.1/f5b5c324f015049fd784a0adcd1957643f5760e/finance-0.12.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
