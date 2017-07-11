@@ -122,7 +122,7 @@ class IdentityApi(val services: CordaRPCOps) {
     }
 
     //create an identity
-    @PUT
+    @POST
     @Path("create")
     fun createIdentity(identity: Identity): Response {
         //get my identity and add it to the list of participants
