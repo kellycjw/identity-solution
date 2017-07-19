@@ -28,7 +28,7 @@ class DeleteIdentityFlow(val identity: Identity) : FlowLogic<IdentityFlowResult>
 
         try {
 
-            // Find the old state
+            // 1. Find the old state
             val idx = serviceHub.vaultService.linearHeadsOfType<IdentityState>().values.indexOfFirst { it.state.data.identity.idNo.compareTo(identity.idNo) == 0 }
             if (idx < 0)
                 return IdentityFlowResult.Failure("idNo cannot be found on ledger: " + identity.idNo)
@@ -36,25 +36,22 @@ class DeleteIdentityFlow(val identity: Identity) : FlowLogic<IdentityFlowResult>
             val oldState = serviceHub.vaultService.linearHeadsOfType<IdentityState>().values.elementAt(idx)
             val notary = oldState.state.notary
 
-            // Creates the transaction, using the nodes that already have the old state
-            // They need to sign the transaction.
-            // Delete => no OUTPUT state
+            // 2. Creates the transaction, using the nodes that already have the old state
             val utx = TransactionType.General.Builder(notary)
                     .withItems(oldState, Command(IdentityContract.Commands.Delete(), oldState.state.data.participants.map { it.owningKey }))
 
-            // The node signs it
+            // 3. Add timestamp to the transaction
             val currentTime = serviceHub.clock.instant()
             utx.addTimeWindow(currentTime, 30.seconds)
+
+            // 4. Verify and sign the transaction
+            utx.toWireTransaction().toLedgerTransaction(serviceHub).verify()
             val ptx = serviceHub.signInitialTransaction(utx)
 
-            // Sends the transaction to the ones that already have the states to sign it
+            // 5. Collect signatures from counterparties
             val stx = subFlow(CollectSignaturesFlow(ptx))
 
-            // Verifing transaction
-            val wtx: WireTransaction = stx.verifySignatures(notary.owningKey)
-            wtx.toLedgerTransaction(serviceHub).verify()
-
-            // FinalityFlow notarizes, records and broadcasts the transaction
+            // 6. Use FinalityFlow to notarize, send and record to all parties' ledger
             subFlow(FinalityFlow(stx, oldState.state.data.allowedParties.toSet()))
             return IdentityFlowResult.Success("Transaction id ${stx.id} committed to ledger.")
 

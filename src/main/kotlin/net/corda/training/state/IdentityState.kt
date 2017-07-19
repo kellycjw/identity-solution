@@ -16,7 +16,7 @@ data class IdentityState(val identity: Identity,
     override val contract get() = IdentityContract()
 
     override fun isRelevant(ourKeys: Set<PublicKey>): Boolean {
-        //track the state in your vault if you belong to any of the allowed parties of this state
+        //Track the state in your vault if you belong to any of the allowed parties of this state
         val partyKeys = allowedParties.toList().map { it.owningKey }
         return ourKeys.intersect(partyKeys).isNotEmpty()
     }

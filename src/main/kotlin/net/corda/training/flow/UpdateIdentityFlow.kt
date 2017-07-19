@@ -30,22 +30,23 @@ class UpdateIdentityFlow(val identity: Identity) : FlowLogic<IdentityFlowResult>
     override fun call(): IdentityFlowResult {
 
         try {
-            //Search for identity using the idNo on ledger
+            // 1. Search for identity using the idNo on ledger
             val idx = serviceHub.vaultService.linearHeadsOfType<IdentityState>().values.indexOfFirst { it.state.data.identity.idNo.compareTo(identity.idNo) == 0 }
 
-            //If identity cannot be found, return error message
+            // 2. If identity cannot be found, return error message
             if (idx < 0)
                 return IdentityFlowResult.Failure("Identification no. cannot be found on ledger: " + identity.idNo)
 
-            //If identity can be found, get the state and reference to it
+            // 3. If identity can be found, get the state and reference to it
             val oldStateRef = serviceHub.vaultService.linearHeadsOfType<IdentityState>().values.elementAt(idx)
 
-            //Create a copy of the old identity state but change identity to the updated one
+            // 4. Create a copy of the old identity state but change identity to the updated one
             val newState = oldStateRef.state.data.copy(identity = identity)
 
+            // 5. Get the notary of the old identity state
             val notary = oldStateRef.state.notary
 
-            //Add participants that can consume the new state
+            // 6. Add participants that can consume the new state
             identity.participants
                 .filter(String::isNotEmpty)
                 .forEach { p -> serviceHub.networkMapCache.partyNodes
@@ -55,45 +56,41 @@ class UpdateIdentityFlow(val identity: Identity) : FlowLogic<IdentityFlowResult>
                     }
                 }
 
-            //Creates the transaction - the nodes that already have access to the old state must sign the transaction
+            // 7. Creates the transaction - the nodes that already have access to the old state must sign the transaction
             val utx = TransactionType.General.Builder(notary)
                     .withItems(oldStateRef, newState, Command(IdentityContract.Commands.Update(), oldStateRef.state.data.allowedParties.map { it.owningKey }))
 
-            //If the updated identity has no documents and the old identity has documents, that means there is no updated document
+            // 8. If the updated identity has no documents and the old identity has documents, that means there is no updated document
             if (identity.documents.orEmpty().size == 0 && oldStateRef.state.data.identity.documents.orEmpty().size > 0)
             {
                 newState.identity.documents = oldStateRef.state.data.identity.documents
             }
 
-            //Add documents in the updated identity (that are active and has a hash) to the proposed transaction
+            // 9. Add documents in the updated identity (that are active and has a hash) to the proposed transaction
             identity.documents.orEmpty()
                     .filter { it.active && it.secureHash != null }
                     .forEach {
                         utx.addAttachment(SecureHash.parse(it.secureHash!!))
                     }
 
-            //Add timestamp to the proposed transaction
+            // 10. Add timestamp to the proposed transaction
             val currentTime = serviceHub.clock.instant()
             utx.addTimeWindow(currentTime, 30.seconds)
 
-            //Verify and sign the transaction
+            // 11. Verify and sign the transaction
             utx.toWireTransaction().toLedgerTransaction(serviceHub).verify()
             var stx = serviceHub.signInitialTransaction(utx)
 
-            //Collect signatures
+            // 12. Collect signatures
             stx = subFlow(CollectSignaturesFlow(stx))
 
-            //Verify collection signatures and signed transaction
-            val wtx: WireTransaction = stx.verifySignatures(notary.owningKey) //this is the signature that is allowed to be missing
-            wtx.toLedgerTransaction(serviceHub).verify()
-
-            //Get all the parties that need to receive the transaction: newly allowed parties + previously allowed parties
+            // 13. Get all the parties that need to receive the transaction: newly allowed parties + previously allowed parties
             var broadcastList: ArrayList<Party> = newState.allowedParties
             oldStateRef.state.data.allowedParties
                     .filter { p -> broadcastList.indexOfFirst { it.name == p.name } == -1 } //those that are not already in the broadcast list
                     .forEach { broadcastList.add(it) }
 
-            //Use FinalityFlow to notarize, send and record the nodes' ledger
+            // 14. Use FinalityFlow to notarize, send and record to all parties' ledger
             subFlow(FinalityFlow(stx, broadcastList.toSet()))
 
             return IdentityFlowResult.Success("Transaction id ${stx.id} committed to ledger.")

@@ -51,6 +51,9 @@ class IdentityApi(val services: CordaRPCOps) {
                 .filter { it != myLegalName && it !in SERVICE_NODE_NAMES })
     }
 
+    /**
+     * Returns all identities in the vault.
+     */
     @GET
     @Path("identities")
     @Produces(MediaType.APPLICATION_JSON)
@@ -61,7 +64,10 @@ class IdentityApi(val services: CordaRPCOps) {
         return vaultInfo.filter { it.state.data is IdentityState }
     }
 
-    //this is used to upload the attachment
+    /**
+     * Uploads the attachment.
+     * Returns the hash of the attachment.
+     */
     @POST
     @Path("document")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -69,18 +75,21 @@ class IdentityApi(val services: CordaRPCOps) {
     fun createDocument(@Context req: HttpServletRequest): Response {
         var secureHash: SecureHash? = null
 
-        //check if uploaded content is multipart
+        // 1. Check if uploaded content is multipart
         val isMultiPart = ServletFileUpload.isMultipartContent(req)
         if (isMultiPart) {
             val fileIterator = ServletFileUpload().getItemIterator(req)
-            //check if there are any files
+
+            // 2. Check if there are any files
             if (!fileIterator.hasNext()) {
                 logger.info("createDocument() - No file to upload")
             } else {
-                //we are only allowing single file upload here so we will only take the next file
+
+                // 3. We are only allowing single file upload here so we will only take the next file
                 val item = fileIterator.next()
                 logger.info("createDocument() - Receiving: ${item.name} of content type ${item.contentType}")
-                //check if file content type is zip as we only allow this type now
+
+                // 4. Check if file content type is zip as we only allow this type
                 if (item.contentType == "application/x-zip-compressed"){
                     try {
                         secureHash = services.uploadAttachment(item.openStream())
@@ -121,20 +130,23 @@ class IdentityApi(val services: CordaRPCOps) {
                 .build()
     }
 
-    //create an identity
+    /**
+     * Creates an identity.
+     * Returns either a success or failure message.
+     */
     @POST
     @Path("create")
     fun createIdentity(identity: Identity): Response {
-        //get my identity and add it to the list of participants
+        // 1. Get my identity and add it to the list of participants
         val me = services.nodeIdentity().legalIdentity.name.toString()
-        //identity.me = me
-        //add myself to the list of participants as the parameter only includes other nodes that we are sharing with
+
+        // 2. Add myself to the list of participants as the parameter only includes other nodes that we are sharing with
         identity.participants.add(me)
 
-        //create output state with the identity
+        // 3. Create output state with the identity
         val state = IdentityState(identity)
 
-        //initiate the create identity flow, log the result
+        // 4. Initiate the create identity flow, log the result
         var result: IdentityFlowResult;
         result = services.startFlowDynamic(CreateIdentityFlow::class.java, state).returnValue.get();
         logger.info("createIdentity() - Result: " + result.toString())
@@ -153,7 +165,10 @@ class IdentityApi(val services: CordaRPCOps) {
         }
     }
 
-    //retrieves the attachment for downloading
+    /**
+     * Retrieves the specific attachment for downloading.
+     * Returns the bytes of the attachment.
+     */
     @GET
     @Path("document/{secureHash}/{fileName}")
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
@@ -171,7 +186,10 @@ class IdentityApi(val services: CordaRPCOps) {
         return response
     }
 
-    //searches for this identity on the ledger
+    /**
+     * Retrieves a specific identity.
+     * Returns the identity if found. Otherwise, return error message.
+     */
     @GET
     @Path("find/{idNo}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -179,10 +197,10 @@ class IdentityApi(val services: CordaRPCOps) {
         try {
             logger.info("findIdentity() ==> Start: Search " + idNo)
 
-            //Returns a pair of head states in the vault and an observable of future updates to the vault.
+            //1. Returns a pair of head states in the vault and an observable of future updates to the vault.
             val (vaultInfo, vaultUpdates) = services.vaultAndUpdates()
-            //vaultUpdates.notUsed()
-            //get the index of the first state with matching idNo, returns -1 if there is no state matching the idNo
+
+            //2. Get the index of the first state with matching idNo, returns -1 if there is no state matching the idNo
             val idx = vaultInfo.indexOfFirst { it.state.data is IdentityState && (it.state.data as IdentityState).identity.idNo.compareTo(idNo) == 0 }
             val stateAndRef: StateAndRef<IdentityState>
 
@@ -196,7 +214,7 @@ class IdentityApi(val services: CordaRPCOps) {
             } else {
                 return Response
                         .status(Response.Status.BAD_REQUEST)
-                        .entity("idNo not found!")
+                        .entity("Identification no. not found!")
                         .build()
             }
         } catch (ex: Exception) {
@@ -208,6 +226,10 @@ class IdentityApi(val services: CordaRPCOps) {
         }
     }
 
+    /**
+     * Updates the identity.
+     * Returns the updated identity if successful. Otherwise, returns an error message.
+     */
     @POST
     @Path("update")
     fun updateIdentity(identity: Identity): Response {
@@ -229,6 +251,10 @@ class IdentityApi(val services: CordaRPCOps) {
         }
     }
 
+    /**
+     * Deletes the identity.
+     * Returns either a success or failure message.
+     */
     @POST
     @Path("delete")
     fun deleteIdentity(identity: Identity): Response {
